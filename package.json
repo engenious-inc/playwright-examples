@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "^1.41.2",
+    "@types/node": "^20.11.17",
     "playwright": "^1.41.2"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.10"
   }
 }
