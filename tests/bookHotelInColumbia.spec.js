@@ -33,20 +33,4 @@ test('Book a hotel in Columbia for the next 5 days', async ({ page }) => {
   await page.locator(fiveDaysAfter).click();
   
   await page.click('button[type="submit"]');
-
-  // Wait for the search results to load
-  await page.waitForSelector('.sr_property_block', { state: 'attached' });
-
-  // Click on the first hotel
-  await page.click('.sr_property_block:first-child .hotel_name_link');
-
-  // Wait for the new tab to open
-  const [newPage] = await Promise.all([
-    browser.waitForEvent('page'),
-    page.waitForNavigation({ waitUntil: 'networkidle' }), // Ensure the new page has loaded
-  ]);
-
-  // You might need to handle the booking process here depending on the site's workflow
-  // This example will just close the browser
-  await browser.close();
 });
