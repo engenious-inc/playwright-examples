@@ -12,7 +12,7 @@ function getFormattedDates() {
   return [`[data-date="${formattedTomorrow}"]`, `[data-date="${formattedInFiveDays}"]`];
 }
 
-test('Book a hotel in Columbia for the next 5 days', async ({ page }) => {
+test('Search for a hotel in Columbia for the next 5 days', async ({ page }) => {
   await page.goto('https://www.booking.com');
 
   // close the pop up
