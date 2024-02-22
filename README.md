@@ -63,9 +63,6 @@ git clone https://github.com/engenious-inc/playwright-examples.git
 
 This incantation 📜 clones the repository into your chosen folder, opening a portal 🌀 to endless possibilities.
 
-```console
-cd playwright-examples 
-```
 
 🔀 **Switching Branches:** After cloning the repository, use the following commands in your terminal to switch to the branch of interest:
 
@@ -79,11 +76,12 @@ git checkout <branch-name>
 ``` 
 Replace <branch-name> with the branch name you want to explore. This magical step will transport you 🚂 to that branch, where you'll find all the relevant code and instructions for that specific example.
 
+
 ##  4. 🛠 Installing Dependencies 
 
 🚀 Open VSCode and the folder where you installed the repository. Then, in the terminal type:
 ```bash
-npm i
+npm install
 ``` 
 This incantation reads the package.json scroll and summons all the dependencies listed there.
 
