@@ -4,10 +4,10 @@ const dayjs = require('dayjs');
 
 test('Search for a hotel in Columbia for the next 5 days', async ({ page }) => {
   await page.goto('https://www.booking.com');
-
+  
   // close the pop up
   let crossPopUpToSigIn = page.locator(`[aria-label="Dismiss sign-in info."]`)
-  await expect(crossPopUpToSigIn).toBeVisible({timeout:10000})
+  await expect(crossPopUpToSigIn).toBeVisible({timeout:20000})
   await crossPopUpToSigIn.click()
   // Enter the destination
   await page.fill('[aria-label="Where are you going?"]', 'Columbia');
@@ -22,7 +22,7 @@ test('Search for a hotel in Columbia for the next 5 days', async ({ page }) => {
   await page.locator(today).click();
   await page.locator(fiveDaysAfter).click();
   
-  await page.click('button[type="submit"]');
+  await page.click('button[type="submit"]',{force:true})
 });
 
 function getFormattedDates() {
