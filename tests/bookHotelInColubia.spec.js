@@ -2,16 +2,6 @@ const { test, expect } = require('@playwright/test');
 
 const dayjs = require('dayjs');
 
-function getFormattedDates() {
-  const tomorrow = dayjs().add(1, 'day');
-  const inFiveDays = dayjs().add(6, 'day');
-
-  const formattedTomorrow = tomorrow.format('YYYY-MM-DD');
-  const formattedInFiveDays = inFiveDays.format('YYYY-MM-DD');
-
-  return [`[data-date="${formattedTomorrow}"]`, `[data-date="${formattedInFiveDays}"]`];
-}
-
 test('Search for a hotel in Columbia for the next 5 days', async ({ page }) => {
   await page.goto('https://www.booking.com');
 
@@ -34,3 +24,13 @@ test('Search for a hotel in Columbia for the next 5 days', async ({ page }) => {
   
   await page.click('button[type="submit"]');
 });
+
+function getFormattedDates() {
+  const tomorrow = dayjs().add(1, 'day');
+  const inFiveDays = dayjs().add(6, 'day');
+
+  const formattedTomorrow = tomorrow.format('YYYY-MM-DD');
+  const formattedInFiveDays = inFiveDays.format('YYYY-MM-DD');
+
+  return [`[data-date="${formattedTomorrow}"]`, `[data-date="${formattedInFiveDays}"]`];
+}

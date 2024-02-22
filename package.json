@@ -1,5 +1,5 @@
 {
-  "name": "playwright-with-chatgbt",
+  "name": "untitled-folder",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,10 +9,7 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.41.2",
-    "@types/node": "^20.11.17",
-    "playwright": "^1.41.2"
-  },
-  "dependencies": {
+    "@types/node": "^20.11.19",
     "dayjs": "^1.11.10"
   }
 }
