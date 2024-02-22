@@ -58,7 +58,7 @@ When git is installed 🌟:
 Open GitBash or Vscode in the folder where you wish to welcome the repository. 📂 And type the command below and press enter 🚀:
 
 ```console
-git clone https://github.com/your-username/playwright-examples.git
+git pull https://github.com/engenious-inc/playwright-examples.git
 ```
 
 This incantation 📜 clones the repository into your chosen folder, opening a portal 🌀 to endless possibilities.
