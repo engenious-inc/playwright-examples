@@ -10,6 +10,7 @@
   "devDependencies": {
     "@playwright/test": "^1.41.2",
     "@types/node": "^20.11.19",
+    "auto-playwright": "^1.14.0",
     "dayjs": "^1.11.10"
   }
 }
