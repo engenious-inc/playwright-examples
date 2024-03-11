@@ -11,7 +11,7 @@ test('Book a hotel in Columbia for the next 5 days', async ({ page }) => {
   await homePage.verifyUrlContains(['searchresults','Columbia']);
 });
 
-// test case : Validate search field
-// test case : 'Discover vacation rentals' button should redirect to the correct page
-// test case : Search with empty field should display error message
-// test case : Unable to select past dates
+// test case 1 : Validate search field
+// test case 2 : 'Discover vacation rentals' button should redirect to the correct page
+// test case 3 : Search with empty field should display error message
+// test case 4 : Unable to select past dates
