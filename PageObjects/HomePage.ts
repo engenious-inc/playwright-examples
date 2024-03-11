@@ -1,7 +1,7 @@
 
-const { expect } = require('@playwright/test');
-const {BasePage} = require('./BasePage');
-const dayjs = require('dayjs');
+import { expect,type Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
+import dayjs from 'dayjs';
 
 /**
  * Represents the home page of the application.
@@ -11,6 +11,13 @@ export class HomePage extends BasePage {
    * Constructs a new instance of the HomePage class.
    * @param {Page} page - The Playwright page object.
    */
+  crossPopUpToSignIn: Locator;
+  destinationInput: Locator;
+  dateField: Locator;
+  calendar: Locator;
+  submitButton: Locator;
+  discoverVacationRentals: Locator;
+
   constructor(page) {
     super(page);
     this.crossPopUpToSignIn = page.getByLabel('Dismiss sign-in info.');
@@ -18,6 +25,7 @@ export class HomePage extends BasePage {
     this.dateField = page.locator('[data-testid="searchbox-dates-container"]');
     this.calendar = page.getByTestId('searchbox-datepicker-calendar');
     this.submitButton = page.locator('button[type="submit"]');
+    this.discoverVacationRentals = page.getByTestId('herobanner-cta');
   }
 
   /**
@@ -34,6 +42,10 @@ export class HomePage extends BasePage {
    */
   async enterDestination(destination) {
     await this.destinationInput.fill(destination);
+  }
+
+  async clickDiscoverVacationRentals() {
+    await this.discoverVacationRentals.click();
   }
 
   /**

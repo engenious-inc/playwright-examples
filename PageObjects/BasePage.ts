@@ -7,6 +7,7 @@ export class BasePage {
    * Creates a new instance of the BasePage class.
    * @param {Page} page - The Playwright page object.
    */
+  page: any; 
   constructor(page) {
     this.page = page;
   }
