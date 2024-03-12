@@ -4,6 +4,7 @@ import {HomePage} from '../PageObjects/HomePage';
 test('Book a hotel in Columbia for the next 5 days', async ({ page }) => {
   const homePage = new HomePage(page);
   await homePage.navigate('https://www.booking.com');
+  await expect(page.url()).toContain('booking.com');
   await homePage.dismissSignInPopup();
   await homePage.enterDestination('Columbia');
   await homePage.setDates(1,5);
@@ -11,36 +12,23 @@ test('Book a hotel in Columbia for the next 5 days', async ({ page }) => {
   await homePage.verifyUrlContains(['searchresults','Columbia']);
 });
 
+/**
+ * What NOT to do with Copilot!
+ *  1. The Copilot is COPILOT!
+ *  So don’t ask to do all the stuff on its own!
+ *  as it does not always produce correct, optimal secure code
+ * 
+ * 2. Use comments instead of inline chat
+ * 
+ * 3. Not reusing prompts
+ */
 
-// TODO: Use copilot to refactor code to Type Script - Done! 
-// What not to do: 
-// 1. Do not use comments if better to use inner chat 
-//   a. use ghost text // for code suggestions! 
-//   b. use inner chat // to ask copilot to change some code or make code instead of comments
-//   c. use chat  - for conversational questions 
-// 2. Use chats commands instead of repeating prompts! 
-
-
-// test case 1 : Validate that search field are visible
-test('Validate that search field are visible', async ({ page }) => {
-  const homePage = new HomePage(page);
-  await homePage.navigate('https://www.booking.com');
-  await homePage.dismissSignInPopup();
-  await expect (homePage.destinationInput).toBeVisible();
-  await expect (homePage.dateField).toBeVisible();
-  await expect (homePage.submitButton).toBeVisible();
-}) 
-
-// test case 2 : 'Discover vacation rentals' button should redirect to the correct page
-test('Discover vacation rentals button should redirect to the correct page', async ({ page }) => {
-  const homePage = new HomePage(page);
-  await homePage.navigate('https://www.booking.com');
-  await homePage.dismissSignInPopup();
-  await homePage.clickDiscoverVacationRentals();
-  await expect(page.getByText('all over the world')).toBeVisible();
-})
-
-
-// HomeWork! 
-// test case 3 : Search with empty field should display error message
-// test case 4 : Unable to select past dates
+/**
+ * Copilot for pros:
+ * ADD class for flights page'
+ * 
+ * Homework! 
+ * Create a class for the 'stays page'
+ * Create a test case to verify that elements are visible on the 'flight page'
+ * Create a test case to verify search buttons on the 'flights page'
+*/
