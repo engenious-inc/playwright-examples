@@ -7,6 +7,10 @@
     "prettier": "npx prettier --write .",
     "prettier-check": "npx prettier . --check '!**.ts'",
     "lint": "npx eslint . --max-warnings=0",
+    "test": "npx playwright test",
+    "test:debug": "npx playwright test --debug",
+    "test:headed": "npx playwright test --headed",
+    "show-report": "npx playwright show-report",
     "prepare": "husky"
   },
   "keywords": [],
