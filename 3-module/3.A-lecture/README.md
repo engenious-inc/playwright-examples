@@ -1,3 +1,5 @@
+https://course-user:Cou1dc4F@test.elitefleetgroup.engenious.io/
+
 # Test Suite for Elite Fleet Group Application
 
 A comprehensive test suite to ensure robust functionality and reliable performance for the **Elite Fleet Group** application ([test.elitefleetgroup.engenious.io](https://test.elitefleetgroup.engenious.io)).
