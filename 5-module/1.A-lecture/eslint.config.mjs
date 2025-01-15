@@ -11,6 +11,7 @@ export default [
   {
     languageOptions: {
       globals: globals.node,
+      parserOptions: { project: './tsconfig.json' },
     },
   },
   pluginJs.configs.recommended,
@@ -18,6 +19,7 @@ export default [
   {
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'error',
+      '@typescript-eslint/no-floating-promises': 'error',
     },
   },
   eslintPluginPlaywright.configs['flat/recommended'],

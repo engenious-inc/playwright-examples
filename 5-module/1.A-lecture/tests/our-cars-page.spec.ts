@@ -11,7 +11,7 @@ test.describe('Our Cars Page', () => {
     await ourCarsPage.navigateToOurCarsPage();
   });
 
-  test('Verify "BMW M760" is visible on the "Our Cars" page', async () => {
+  test.only('Verify "BMW M760" is visible on the "Our Cars" page', async () => {
     const isCarVisible = await ourCarsPage.isCarButtonVisible(BMW_M760);
     expect(isCarVisible).toBeTruthy();
   });
