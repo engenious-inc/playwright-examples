@@ -8,10 +8,9 @@ export class OurCarsPage extends BasePage {
   }
 
   async getCarButton(carName: string): Promise<Locator> {
-    return this.page
-      .getByRole('button', { name: `Car Image Car Image ${carName}` })
-      .nth(1);
+    return this.page.locator(`button:has-text("${carName}")`);
   }
+
   getCarDetailsText(carName: string): Locator {
     return this.page.getByText(carName);
   }
