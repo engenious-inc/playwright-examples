@@ -3,6 +3,8 @@ import { test, expect } from '@playwright/test';
 test('Verify "BMW M760" is visible on the "Our Cars" page', async ({
   page,
 }) => {
+
+ ,
   await page.goto(
     'https://course-user:Cou1dc4F@test.elitefleetgroup.engenious.io/',
   );
