@@ -10,4 +10,19 @@ export class DropDownElement extends BaseElement {
   async selectOption(option: string): Promise<void> {
     await this.locator.selectOption({ label: option });
   }
+
+  async selectDate(dateString: string): Promise<void> {
+    const dateLocator = this.locator.locator(
+      `.react-datepicker__day--${dateString}`,
+    );
+    await dateLocator.click();
+  }
+
+  async selectBookingDates(
+    startDateString: string,
+    endDateString: string,
+  ): Promise<void> {
+    await this.selectDate(startDateString);
+    await this.selectDate(endDateString);
+  }
 }
