@@ -16,7 +16,7 @@ test.describe('Our Cars Page - Extended Tests', () => {
     loginPage = new LoginPage(page);
     ourCarsPage = new OurCarsPage(page);
     navigationPage = new NavigationPage(page);
-    await loginPage.navigateTo();
+    await loginPage.navigateTo('/our-cars');
     await loginPage.login(EMAIL, PASSWORD);
   });
 

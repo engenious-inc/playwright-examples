@@ -18,10 +18,6 @@ export class LoginPage extends BasePage {
     this.errorMessage = new TextElement(page, '.error-message');
   }
 
-  async navigateTo(): Promise<void> {
-    await this.page.goto('/login');
-  }
-
   async login(email: string, password: string): Promise<void> {
     await this.emailInput.enterText(email);
     await this.passwordInput.enterText(password);
