@@ -17,9 +17,8 @@ export const selectBookingDates = (): {
   const startDate = getStartDate();
   const endDate = getEndDate();
 
-  const startDateString = startDate.toISOString().split('T')[0];
-  const endDateString = endDate.toISOString().split('T')[0];
-
+  const startDateString = startDate.toISOString().split('T')[0]; // startDateString = '2022-01-01'
+  const endDateString = endDate.toISOString().split('T')[0]; // endDateString = '2022-01-07'
   return {
     startDateString,
     endDateString,
