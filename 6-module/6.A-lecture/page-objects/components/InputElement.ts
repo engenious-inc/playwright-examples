@@ -8,6 +8,7 @@ export class InputElement extends BaseElement {
   }
 
   async enterText(text: string): Promise<void> {
+    await this.locator.waitFor({ state: 'visible' });
     await this.locator.fill(text);
   }
 

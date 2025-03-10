@@ -3,6 +3,8 @@ import { expect } from '@playwright/test';
 
 const BMW_M760 = 'BMW M760';
 const EMAIL = 'podam96524@maonyn.com';
+const INVALID_EMAIL = 'invalid@maonyn.com';
+const INVALID_PASSWORD = 'WrongPassword!';
 const PASSWORD = 'TestEng123!';
 
 test.describe('Our Cars Page - Extended Tests', () => {
@@ -67,5 +69,17 @@ test.describe('Our Cars Page - Extended Tests', () => {
     expect(
       await ourCarsPage.isCarInBookingDetails('BMW M8 Competition Gran Coupe'),
     ).toBeTruthy();
+  });
+
+  test('Invalid login credentials show error message', async ({ loginPage }) => {
+    await loginPage.login(INVALID_EMAIL, INVALID_PASSWORD);
+    expect(await loginPage.isErrorMessageVisible()).toBeTruthy();
+  });
+
+  test('Car button not visible for an unavailable car', async ({
+    ourCarsPage,
+  }) => {
+    await ourCarsPage.navigateTo('/our-cars');
+    expect(await ourCarsPage.isCarButtonVisible('NonExistentCar')).toBeFalsy();
   });
 });

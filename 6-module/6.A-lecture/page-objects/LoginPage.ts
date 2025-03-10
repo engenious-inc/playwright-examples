@@ -12,8 +12,8 @@ export class LoginPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.emailInput = new InputElement(page, '#email');
-    this.passwordInput = new InputElement(page, '#password');
+    this.emailInput = new InputElement(page, 'input[name="email"]');
+    this.passwordInput = new InputElement(page, 'input[name="password"]');
     this.loginButton = new ButtonElement(page, 'button[type="submit"]');
     this.errorMessage = new TextElement(page, '.error-message');
   }
