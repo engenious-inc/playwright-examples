@@ -19,7 +19,8 @@ export class LoginPage extends BasePage {
   }
 
   async navigateTo(): Promise<void> {
-    await this.page.goto('/login');
+    await this.page.goto('/');
+    await this.page.getByRole('button', { name: 'Sign In' }).nth(1).click();
   }
 
   async login(email: string, password: string): Promise<void> {
