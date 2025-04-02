@@ -4,14 +4,15 @@ export class AboutUsPage {
   constructor(private page: Page) {}
 
   async isTitleVisible(title: string): Promise<boolean> {
-    return this.page.locator(`h1:has-text("${title}")`).isVisible();
+    return this.page.locator(`h1`, { hasText: title }).isVisible();
   }
 
   async getSectionText(sectionTitle: string): Promise<string> {
-    const section = this.page.locator(`h2:has-text("${sectionTitle}")`).locator('..').locator('p');
+    const section = this.page.locator(`h2:has-text("${sectionTitle}") + p`);
     const text = await section.textContent();
     if (!text) {
-      throw new Error(`Text content for section "${sectionTitle}" is null or undefined.`);
+      const currentUrl = await this.page.url();
+      throw new Error(`Text content for section "${sectionTitle}" is null or undefined. Locator: h2:has-text("${sectionTitle}"), Page URL: ${currentUrl}`);
     }
     return text.trim();
   }

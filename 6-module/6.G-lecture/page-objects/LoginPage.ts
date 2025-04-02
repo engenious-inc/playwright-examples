@@ -40,9 +40,12 @@ export class LoginPage extends BasePage {
     const emailLocator = this.page.locator('.user-profile-email');
     const usernameLocator = this.page.locator('.user-profile-name');
 
-    return (
-      (await emailLocator.textContent()) === email &&
-      (await usernameLocator.textContent()) === username
-    );
+    const emailText = await emailLocator.textContent();
+    const usernameText = await usernameLocator.textContent();
+
+    const isEmailMatching = emailText === email;
+    const isUsernameMatching = usernameText === username;
+
+    return isEmailMatching && isUsernameMatching;
   }
 }
