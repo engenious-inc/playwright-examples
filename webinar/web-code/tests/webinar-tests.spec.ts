@@ -1,5 +1,4 @@
-import { test } from '../fixtures/global';
-import { expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 
 //jakogam253@oronny.com
