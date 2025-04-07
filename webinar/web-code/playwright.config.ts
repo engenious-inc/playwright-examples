@@ -19,6 +19,7 @@ export default defineConfig({
   retries: 0,
   workers: undefined,
   reporter: 'html',
+  //reporter: [['allure-playwright']],
   use: {
     baseURL: 'https://course-user:Cou1dc4F@test.elitefleetgroup.engenious.io/',
     trace: 'retain-on-failure',
@@ -32,6 +33,10 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    // {
+    //   name: 'mobile_safari',
+    //   use: { ...devices['iPhone 15'] }, // Emulate iPhone 15 Safari
+    // },
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
