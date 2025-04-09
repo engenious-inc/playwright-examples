@@ -11,17 +11,17 @@ test.describe('Webinar', () => {
 
   test('Locator Strategies for Email Field', async ({ page }) => {
     // Locator Strategy 1: getByRole (recommended Playwright API)
-    await page.getByRole('textbox', { name: 'Email' });
+    page.getByRole('textbox', { name: 'Email' });
 
     // Locator Strategy 2: getByLabel (for labeled fields)
-    await page.getByLabel('Email');
+    page.getByLabel('Email');
 
     // Locator Strategy 3: CSS selector (attribute based)
-    await page.locator('input[type="email"]');
+    page.locator('input[type="email"]');
 
     // Locator Strategy 4: XPath
 
-    await page.locator(
+    page.locator(
       'xpath=html/body/div[3]/div/div/div/form/div[1]/div/input',
     );
 
