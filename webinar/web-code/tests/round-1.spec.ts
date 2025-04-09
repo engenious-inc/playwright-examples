@@ -9,7 +9,6 @@ test.describe('Webinar', () => {
   });
 
   // Round 1: Login Automation
-
   test('Login Automation', async ({ page }) => {
     await page.getByRole('button', { name: 'Sign In' }).click();
 
