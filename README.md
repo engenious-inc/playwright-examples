@@ -15,6 +15,7 @@ Each example is hosted in its branch. 🌱 To dive into an example that interest
 ## 1. Install VSCode! ✨
 
 
+
 <details>
 <summary>📥 How to Install VSCode </summary>
 🔍 Seek out the official Visual Studio Code website and claim the version meant for your realm (operating system).
