@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "strict": true,
+    "module": "CommonJS",
+    "sourceMap": true,
+    "types": ["node"]
+  },
+  "exclude": ["node_modules", "playwright-report", "test-results"]
+}
