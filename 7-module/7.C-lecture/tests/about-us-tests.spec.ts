@@ -62,11 +62,7 @@ test.describe('About Us Page', () => {
     aboutUsPage,
   }) => {
     const phoneLink = await aboutUsPage.getContactLink('phone');
-    console.log('========================================');
-    console.log('Phone link:', phoneLink);
     const emailLink = await aboutUsPage.getContactLink('email');
-    console.log('Email link:', emailLink);
-    console.log('========================================');
     expect(phoneLink).toBe('+1 786 297 8226');
     expect(emailLink).toBe('Info@Elitefleetgroup.com');
   });
