@@ -12,7 +12,7 @@ test.describe('Our Cars Page - Extended Tests', () => {
     await loginPage.navigateTo();
     await loginPage.login(EMAIL, PASSWORD);
   });
-test('Verify choose car list is visible', async ({
+  test('Verify choose car list is visible', async ({
     navigationPage,
     ourCarsPage,
   }) => {
@@ -22,20 +22,24 @@ test('Verify choose car list is visible', async ({
     ).toBeTruthy();
   });
 
- test('Verify booking shows correct dates', async ({
-  navigationPage,
-  ourCarsPage,
-}) => {
-  await navigationPage.goToBookingDetails(307);
+  test('Verify booking shows correct dates', async ({
+    navigationPage,
+    ourCarsPage,
+  }) => {
+    await navigationPage.goToBookingDetails(307);
 
-  const firstDateVisible = await ourCarsPage.isBookingDateVisible('September 13, 2026 8:00 AM');
-  console.log('First date visible:', firstDateVisible);
-  expect(firstDateVisible).toBeTruthy();
+    const firstDateVisible = await ourCarsPage.isBookingDateVisible(
+      'September 13, 2026 8:00 AM',
+    );
+    console.log('First date visible:', firstDateVisible);
+    expect(firstDateVisible).toBeTruthy();
 
-  const secondDateVisible = await ourCarsPage.isBookingDateVisible('October 3, 2026 6:30 AM');
-  console.log('Second date visible:', secondDateVisible);
-  expect(secondDateVisible).toBeTruthy();
-});
+    const secondDateVisible = await ourCarsPage.isBookingDateVisible(
+      'October 3, 2026 6:30 AM',
+    );
+    console.log('Second date visible:', secondDateVisible);
+    expect(secondDateVisible).toBeTruthy();
+  });
 
   test('Verify user profile shows correct data', async ({
     navigationPage,
@@ -57,7 +61,9 @@ test('Verify choose car list is visible', async ({
     ).toBeTruthy();
   });
 
-  test('Invalid login credentials show error message', async ({ loginPage }) => {
+  test('Invalid login credentials show error message', async ({
+    loginPage,
+  }) => {
     await loginPage.login(INVALID_EMAIL, INVALID_PASSWORD);
     expect(await loginPage.isErrorMessageVisible()).toBeTruthy();
   });
