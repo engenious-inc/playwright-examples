@@ -35,4 +35,18 @@ test.describe('Our Cars Page', () => {
     const bookNowButtonVisible = await ourCarsPage.getBookNowButton(BMW_M760);
     expect.soft(bookNowButtonVisible).toBeDefined();
   });
+
+  test('testing codegen', async ({ page }) => {
+    await page.goto(
+      'https://course-user:Cou1dc4F@test.elitefleetgroup.engenious.io/',
+    );
+    await page.getByRole('button', { name: 'Sign In' }).nth(1).click();
+    await expect(page.getByRole('button', { name: 'Sign in' })).toBeVisible();
+    await page.getByRole('textbox', { name: 'Email' }).click();
+    await page.getByRole('textbox', { name: 'Email' }).fill('testingt');
+    await page.getByRole('textbox', { name: 'Password' }).click();
+    await page.getByRole('textbox', { name: 'Password' }).fill('testing');
+    await page.getByRole('button', { name: 'Sign in' }).click();
+    await expect(page.locator('form')).toContainText('Email is not valid');
+  });
 });
