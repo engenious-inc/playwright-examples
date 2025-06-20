@@ -65,12 +65,12 @@ test.describe('3. Checkboxes, Selects, Key Presses, Action Options', () => {
   test('Selecting from Dropdowns', async ({ page }) => {
     await page.locator('select#cars').selectOption('volvo');
     await page.locator('select#cars').selectOption({ label: 'Volvo' });
-    await page.locator('select#cars').selectOption({ index: 1 });
+    await page.locator('select#cars').selectOption({ index: 3 });
   });
 
   test('Key Presses', async ({ page }) => {
     await page.locator('#input').press('Enter');
-    await page.locator('#input').press('Control+A');
+    await page.locator('#input').press('Meta+A');
   });
 
   test('Common Action Options', async ({ page }) => {
