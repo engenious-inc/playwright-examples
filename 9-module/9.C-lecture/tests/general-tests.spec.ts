@@ -8,9 +8,12 @@ const INVALID_PASSWORD = 'WrongPassword!';
 const PASSWORD = 'TestEng123!';
 
 test.describe('Our Cars Page - Extended Tests', () => {
-  test.beforeEach(async ({ loginPage }) => {
+  test.beforeEach(async ({ loginPage, page }) => {
     await loginPage.navigateTo();
     await loginPage.login(EMAIL, PASSWORD);
+    page.setDefaultTimeout(5000);
+
+    // await page.waitForLoadState('load');
   });
   test('Verify choose car list is visible', async ({
     navigationPage,
