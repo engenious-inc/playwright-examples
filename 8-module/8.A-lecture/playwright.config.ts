@@ -25,6 +25,7 @@ export default defineConfig({
     actionTimeout: 0,
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
+    testIdAttribute: 'data-test-id',
   },
 
   projects: [
