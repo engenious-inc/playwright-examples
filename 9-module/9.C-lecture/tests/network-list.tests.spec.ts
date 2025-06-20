@@ -1,7 +1,5 @@
-import { request } from '@playwright/test';
-import { test } from '../fixtures/global'; // Import the custom test with fixtures
+import { test } from '../fixtures/global';
 import { expect } from '@playwright/test';
-import { LoginPage } from '../page-objects/LoginPage';
 
 test('Admin login and fetch vehicles', async ({ request }) => {
   const loginResponse = await request.post(
@@ -31,6 +29,8 @@ test('Admin login and fetch vehicles', async ({ request }) => {
   const responseJson = await vehicleResponse.json();
   const vehicles = responseJson.vehicles;
 
+  console.log('Vehicles:', vehicles);
+
   expect(Array.isArray(vehicles)).toBe(true);
   expect(vehicles.length).toBeGreaterThan(0);
 });
@@ -45,7 +45,7 @@ test('Register new user with empty images and verify profile', async ({
   // Step 1: Register user (no auth header needed)
   const formData = {
     //! email should be unique for each test run
-    email: 'newuser_emp223images@example.com',
+    email: 'testemail1@example.com',
     firstName: 'Jane',
     lastName: 'Doe',
     phoneNumber: '+1234567890',

@@ -1,7 +1,6 @@
 import { test } from '../fixtures/global'; // Import the custom test with fixtures
 import { expect } from '@playwright/test';
 
-const BMW_M760 = 'BMW M760';
 const EMAIL = 'podam96524@maonyn.com';
 const INVALID_EMAIL = 'invalid@maonyn.com';
 const INVALID_PASSWORD = 'WrongPassword!';

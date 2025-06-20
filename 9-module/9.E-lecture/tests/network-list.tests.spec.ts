@@ -57,8 +57,9 @@ test('create user and login', async ({ request, page, loginPage }) => {
   await loginPage.navigateTo();
   await loginPage.login(profile.users.email, formData.password);
   await page.goto('/profile');
-  await expect(page.getByRole('main')).toContainText('Jane');
-  await expect(page.getByRole('main')).toContainText('Doe');
+  const mainSection = page.getByRole('main').first();
+  await expect(mainSection).toContainText('Jane');
+  await expect(mainSection).toContainText('Doe');
 });
 
 //login
