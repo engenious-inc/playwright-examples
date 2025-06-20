@@ -1,4 +1,3 @@
-/* eslint-disable playwright/no-force-option */
 /* eslint-disable playwright/expect-expect */
 
 import { test } from '@playwright/test';
@@ -39,15 +38,17 @@ test.describe('2. Clicking, Typing, and Forcing Actions', () => {
   test('Clicking', async ({ page }) => {
     await page.locator('button.submit').click();
     await page.getByText('Submit').click();
-    await page.locator('button').click({ button: 'right' });
+    await page
+      .locator('button')
+      .click({ button: 'right', delay: 100, clickCount: 2, force: true });
     await page.locator('button').click({ clickCount: 2 });
-    await page.locator('button').click({ modifiers: ['Shift'] });
+    await page.locator('button').click({ modifiers: ['Shift', 'Alt'] });
   });
 
   test('Typing', async ({ page }) => {
     await page.locator('#email').fill('user@example.com');
-    await page.locator('#email').type('user@example.com');
-    await page.locator('#email').type('user@example.com', { delay: 100 });
+    await page.locator('#email').fill('user@example.com');
+    await page.locator('#email').fill('user@example.com', { delay: 100 });
   });
 
   test('Forcing Actions', async ({ page }) => {
