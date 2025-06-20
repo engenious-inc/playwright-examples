@@ -1,65 +1,31 @@
-import { request } from '@playwright/test';
-import { test } from '../fixtures/global'; // Import the custom test with fixtures
+import { test } from '../fixtures/global';
 import { expect } from '@playwright/test';
-import { LoginPage } from '../page-objects/LoginPage';
 
-test('create user and login', async ({ request, page, loginPage }) => {
-  // await page.goto(
-  //   'https://course-user:Cou1dc4F@test.elitefleetgroup.engenious.io/',
-  // );
-  // Step 1: Register user (no auth header needed)
-  const formData = {
-    //! email should be unique for each test run
-    email: 'newuser13212s@example.com',
-    firstName: 'Jane',
-    lastName: 'Doe',
-    phoneNumber: '+1234567890',
-    password: 'StrongPassword123!',
-    driverLicenseImage1: '',
-    driverLicenseImage2: '',
-    insuranceDeclarationPageImage: '',
-    insuranceCardImage: '',
-  };
-
-  const registerResponse = await request.post(
-    'https://test.api.elitefleetgroup.engenious.io/auth/register',
-    {
-      multipart: formData,
-    },
-  );
-
-  console.log('Register user response status:', registerResponse.status());
-  expect(registerResponse.status()).toBe(201);
-
-  const registerBody = await registerResponse.json();
-  expect(registerBody).toHaveProperty('accessToken');
-  const userToken = registerBody.accessToken;
-
-  // Step 2: Fetch profile as the new user
-  const profileResponse = await request.get(
-    'https://test.api.elitefleetgroup.engenious.io/users/profile/customer',
-    {
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-      },
-    },
-  );
-
-  expect(profileResponse.ok()).toBe(true);
-  const profile = await profileResponse.json();
-
-  console.log('New user profile:', profile);
-  expect(profile.users.email).toBe(formData.email);
-  expect(profile.users.firstName).toBe(formData.firstName);
-  expect(profile.users.lastName).toBe(formData.lastName);
-
-  //login created user
+test('monitoring network', async ({ page, loginPage }) => {
   await loginPage.navigateTo();
-  await loginPage.login(profile.users.email, formData.password);
-  await page.goto('/profile');
+  page.on('request', (request) => {
+    if (
+      request.url() ===
+      'https://test.api.elitefleetgroup.engenious.io/vehicles/platform/random'
+    ) {
+      console.log('Request made to:', request.url());
+      console.log('Request method:', request.method());
+    }
+  });
+
+  page.on('response', (response) => {
+    if (
+      response.url() ===
+      'https://test.api.elitefleetgroup.engenious.io/vehicles/platform/random'
+    ) {
+      console.log('Response made to:', response.url());
+      console.log('Response status:', response.status());
+      console.log('Response body:', response.body());
+    }
+  });
+
+  await page.goto('/');
   const mainSection = page.getByRole('main').first();
   await expect(mainSection).toContainText('Jane');
   await expect(mainSection).toContainText('Doe');
 });
-
-//login
