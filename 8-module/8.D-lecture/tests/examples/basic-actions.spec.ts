@@ -86,16 +86,18 @@ test.describe('4. Locators, Getting Values, and Performing Checks', () => {
     const button = page.locator('button.submit');
     await button.click();
     await page.locator('form').locator('button').click();
+    await button.click();
   });
 
   test('Getting Text', async ({ page }) => {
-    const heading = await page.locator('h1').textContent();
-    console.log(heading);
+    const heading = await page.locator('h2').textContent(); // Pick-up date
+    console.log(heading); //Pick-up date
   });
 
   test('Getting Attributes', async ({ page }) => {
-    const href = await page.locator('a').getAttribute('href');
-    console.log(href);
+    const href = page.locator('input');
+    await expect(href).toHaveAttribute('value', 'text'); // Assuming the input has a value attribute
+    console.log(href); // text
   });
 
   test('Performing Checks', async ({ page }) => {
