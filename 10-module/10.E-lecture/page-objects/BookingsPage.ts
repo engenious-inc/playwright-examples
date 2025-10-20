@@ -13,6 +13,7 @@ export class BookingsPage extends BasePage {
 
   async open(): Promise<void> {
     await this.page.goto('/booking/list');
+    await expect(this.title).toBeVisible();
   }
 
   rowByNumber(bookingNumber: string): Locator {
@@ -42,6 +43,29 @@ export class BookingsPage extends BasePage {
     await expect(row).toContainText(expectedTotal);
     await expect(this.viewDetailsButtonInRow(bookingNumber)).toBeVisible();
   }
+
+  async expectBookingNumberVisible(bookingNumber: string): Promise<void> {
+    const row = this.rowByNumber(bookingNumber);
+    await expect(row).toContainText(`#${bookingNumber}`);
+  }
+
+  async expectCarNameInRow(bookingNumber: string, carName: string): Promise<void> {
+    const row = this.rowByNumber(bookingNumber);
+    await expect(row).toContainText(carName);
+  }
+
+  async expectTotalInRow(bookingNumber: string, total: string): Promise<void> {
+    const row = this.rowByNumber(bookingNumber);
+    await expect(row).toContainText(total);
+  }
+
+  async clickViewDetails(bookingNumber: string): Promise<void> {
+    await this.viewDetailsButtonInRow(bookingNumber).click();
+  }
+
+  async expectAtLeastTwoBookings(): Promise<void> {
+    await expect(this.bookingRows).toHaveCount({ min: 2 });
+  }
 }
 
 export class BookingDetailsPage extends BasePage {
@@ -62,6 +86,26 @@ export class BookingDetailsPage extends BasePage {
 
   async open(id: string | number): Promise<void> {
     await this.page.goto(`/booking/details/${id}`);
+  }
+
+  async expectBookingNumber(bookingNumber: string): Promise<void> {
+    await expect(this.headerNumber).toContainText(`#${bookingNumber}`);
+  }
+
+  async expectCarName(carName: string): Promise<void> {
+    await expect(this.carName).toContainText(carName);
+  }
+
+  async expectPricePerDay(price: string): Promise<void> {
+    await expect(this.pricePerDay).toContainText(price);
+  }
+
+  async expectTotalPrice(total: string): Promise<void> {
+    await expect(this.totalPrice).toContainText(total);
+  }
+
+  async goBackToBookings(): Promise<void> {
+    await this.backLink.click();
   }
 }
 

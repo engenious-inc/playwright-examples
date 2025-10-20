@@ -4,6 +4,7 @@ import { OurCarsPage } from '../page-objects/OurCarsPage';
 import { NavigationPage } from '../page-objects/NavigationPage';
 import { BookingCar } from '../page-objects/BookingCar';
 import { AboutUsPage } from '../page-objects/AboutUsPage';
+import { BookingsPage, BookingDetailsPage } from '../page-objects/BookingsPage';
 
 type Fixtures = {
   loginPage: LoginPage;
@@ -11,6 +12,8 @@ type Fixtures = {
   navigationPage: NavigationPage;
   bookingCarPage: BookingCar;
   aboutUsPage: AboutUsPage;
+  bookingsPage: BookingsPage;
+  bookingDetailsPage: BookingDetailsPage;
 };
 
 const test = baseTest.extend<Fixtures>({
@@ -33,6 +36,14 @@ const test = baseTest.extend<Fixtures>({
   aboutUsPage: async ({ page }, use) => {
       const aboutUsPage = new AboutUsPage(page);
       await use(aboutUsPage);
+  },
+  bookingsPage: async ({ page }, use) => {
+    const bookingsPage = new BookingsPage(page);
+    await use(bookingsPage);
+  },
+  bookingDetailsPage: async ({ page }, use) => {
+    const bookingDetailsPage = new BookingDetailsPage(page);
+    await use(bookingDetailsPage);
   },
 });
 
