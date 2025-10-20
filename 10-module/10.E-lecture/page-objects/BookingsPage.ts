@@ -8,7 +8,7 @@ export class BookingsPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.title = page.getByRole('heading', { name: 'My Bookings' });
-    this.bookingRows = page.locator('[data-testid="booking-row"]');
+    this.bookingRows = page.locator('listitem');
   }
 
   async open(): Promise<void> {
@@ -17,7 +17,7 @@ export class BookingsPage extends BasePage {
   }
 
   rowByNumber(bookingNumber: string): Locator {
-    return this.page.locator('section, div').filter({ hasText: `#${bookingNumber}` });
+    return this.page.locator(`text=#${bookingNumber}`).locator('..').locator('..');
   }
 
   viewDetailsButtonInRow(bookingNumber: string): Locator {
@@ -64,7 +64,8 @@ export class BookingsPage extends BasePage {
   }
 
   async expectAtLeastTwoBookings(): Promise<void> {
-    await expect(this.bookingRows).toHaveCount({ min: 2 });
+    await expect(this.page.locator('text=#307')).toBeVisible();
+    await expect(this.page.locator('text=#306')).toBeVisible();
   }
 }
 

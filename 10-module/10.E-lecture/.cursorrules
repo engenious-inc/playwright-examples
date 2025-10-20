@@ -34,6 +34,7 @@
 - Use `test.describe`, fixtures, and POM methods; assertions must be explicit and specific.
 - Prefer role/accessible-name locators or stable test IDs.
 - **CRITICAL**: Each test must have exactly ONE assertion. Split multiple assertions into separate tests.
+- **CRITICAL**: Use simple text-based assertions in tests, not complex POM methods. Avoid putting assertions in POM classes.
 
 ### Self-Evaluation Workflow (Mandatory)
 
