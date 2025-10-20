@@ -66,7 +66,7 @@ export class NavigationPage extends BasePage {
   }
 
   async goToBookingDetails(bookingId: number): Promise<void> {
-    await this.page.goto(`/booking-details/${bookingId}`);
+    await this.page.goto(`/booking/details/${bookingId}`);
   }
 
   async goToUserProfile(): Promise<void> {
@@ -74,6 +74,6 @@ export class NavigationPage extends BasePage {
   }
 
   async goToBookingList(): Promise<void> {
-    await this.page.goto('/booking-list');
+    await this.page.goto('/booking/list');
   }
 }

@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { ButtonElement } from './components/ButtonElement';
 import { InputElement } from './components/InputElement';
@@ -20,13 +20,22 @@ export class LoginPage extends BasePage {
 
   async navigateTo(): Promise<void> {
     await this.page.goto('/');
-    await this.page.getByRole('button', { name: 'Sign In' }).nth(1).click();
+    const primarySignIn = this.page.getByRole('button', { name: /^Sign In$/ }).first();
+    try {
+      await primarySignIn.click({ trial: true, timeout: 3000 });
+      await primarySignIn.click();
+    } catch {
+      const alternateSignIn = this.page.getByRole('button', { name: /^Sign In$/ }).nth(1);
+      await alternateSignIn.click();
+    }
+    await expect(this.page.getByRole('heading', { name: /^SIGN IN$/ })).toBeVisible();
   }
 
   async login(email: string, password: string): Promise<void> {
     await this.emailInput.enterText(email);
     await this.passwordInput.enterText(password);
     await this.loginButton.click();
+    await expect(this.page.getByRole('heading', { name: /^SIGN IN$/ })).toBeHidden();
   }
 
   async isErrorMessageVisible(): Promise<boolean> {
