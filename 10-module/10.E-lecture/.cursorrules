@@ -1,0 +1,146 @@
+### Purpose
+
+- Create consistently high-quality Playwright end-to-end tests in TypeScript.
+- Enforce SOLID practices and reuse existing Page Object Model (POM) assets in this module.
+- Self-evaluate every new/edited test by running it via Playwright and Playwright MCP, auto-debugging until green or producing a minimal actionable report.
+- Produce a concise short result and a commit message proposal.
+
+### Scope
+
+- Applies only to this module: `10-module/10.E-lecture`.
+- Tests live in `10-module/10.E-lecture/tests/`.
+- Reuse assets from:
+  - `10-module/10.E-lecture/page-objects/`
+  - `10-module/10.E-lecture/fixtures/`
+  - `10-module/10.E-lecture/utils/`
+  - `10-module/10.E-lecture/playwright.config.ts`
+
+### Constraints and Principles
+
+- TypeScript + Playwright Test.
+- Use and extend existing POMs/fixtures; avoid duplication.
+- SOLID:
+  - Single Responsibility per test.
+  - Open/Closed for POMs: extend without modifying stable APIs.
+  - Respect contracts (LSP), expose minimal interfaces (ISP), depend on abstractions (DIP).
+- No comments inside generated test code.
+- Deterministic, isolated, idempotent; prefer robust locators and explicit expectations.
+- Prefer existing data/fixtures; add data via fixtures/helpers if needed.
+
+### Authoring Rules
+
+- Co-locate new tests under `tests/` with clear filenames, e.g. `feature-behavior.spec.ts`.
+- Import from `page-objects/`, `fixtures/`, and `utils/` in this module.
+- Use `test.describe`, fixtures, and POM methods; assertions must be explicit and specific.
+- Prefer role/accessible-name locators or stable test IDs.
+- **CRITICAL**: Each test must have exactly ONE assertion. Split multiple assertions into separate tests.
+
+### Self-Evaluation Workflow (Mandatory)
+
+1. Immediately run only the affected test file.
+2. On failure, triage quickly:
+   - Verify imports/fixtures/POM usage.
+   - Fix selectors/expectations using existing POM methods; minimally extend POM if truly needed.
+   - Re-run the single test file.
+3. When green, run the entire module test suite.
+4. If failures persist, output a minimal actionable report and suggested edits.
+
+### Execution Rules
+
+- Module root: `10-module/10.E-lecture`.
+- Use local `playwright.config.ts`.
+- First run targets the single spec file.
+- MCP-first HARD GATE: Do not run any CLI Playwright command before the MCP single-file run of the affected spec has completed.
+- MCP must be used first for any new or edited spec before CLI runs.
+- If a CLI run is attempted before MCP, stop, run MCP on the single spec, and only then proceed.
+- When a new test spec is created, run only that new spec (single-file run). Do not run the full module regression unless explicitly requested.
+- For edits to existing tests, after the single-file run is green, you may run the module suite if requested or necessary for validation.
+
+### Commands (non-interactive)
+
+- Single test file run (replace placeholders):
+
+```bash
+cd 10-module/10.E-lecture && npx --yes playwright test tests/<file>.spec.ts --config=playwright.config.ts --reporter=list
+```
+
+- Module-wide regression:
+
+```bash
+cd 10-module/10.E-lecture && npx --yes playwright test --config=playwright.config.ts --reporter=line
+```
+
+- Headed debug run (optional):
+
+```bash
+cd 10-module/10.E-lecture && npx --yes playwright test tests/<file>.spec.ts --config=playwright.config.ts --headed --project=chromium
+```
+
+### Playwright MCP Usage
+
+- HARD GATE: MCP single-file run must occur BEFORE any CLI run for the affected spec.
+- Scope: The affected spec only (newly added or edited).
+- Steps:
+  1. Execute the affected spec with Playwright MCP immediately after creation/edits.
+  2. If failing, capture the last failing step, locator suggestions, and retry hints.
+  3. Apply minimal fixes (selectors/POM usage), then re-run via MCP.
+  4. Repeat until MCP single-file run is green.
+  5. Only after MCP is green, run the CLI single-file command.
+- Evidence: Record MCP run outcome in the Short Result (passed/failed and last fix applied).
+
+### POM Extension Rules
+
+- Prefer existing methods; extend only for missing behavior.
+- Use intention-revealing names; encapsulate expectations in POM where it improves clarity.
+- Avoid exposing raw locators to tests; expose actions and state queries.
+
+### Flakiness Guardrails
+
+- Avoid `waitForTimeout`; rely on `expect`-based waits.
+- Use `toBeVisible`, `toHaveText`, `toHaveURL`, `toHaveAttribute`, or test IDs.
+- Ensure setup/teardown via fixtures; avoid shared mutable state.
+
+### Generation Requirements
+
+- Produce test code without comments.
+- Correct imports for this module’s structure.
+- Types must compile with this module’s `tsconfig.json`.
+- Respect ESLint rules.
+
+### Short Result (Return at End of Task)
+
+- Added/changed: file paths and brief intent.
+- Status: single-file run result; module regression result.
+- Follow-ups: optional small POM improvements.
+
+Example format:
+
+- Added `10-module/10.E-lecture/tests/<file>.spec.ts` validating <behavior>.
+- Single-file run: passed.
+- Module regression: passed.
+- Follow-up: <optional>.
+
+### Commit Message Template
+
+```
+feat(tests/10.E-lecture): add <feature> e2e spec
+
+- Add <file>.spec.ts using existing POM <Names>
+- Validates: <concise scenarios>
+- Deterministic, SOLID, no comments in code
+
+Refs: <issue/URL if any>
+```
+
+### Auto-Update of Rules
+
+- When a repeatable pattern is discovered (login, data seeding, etc.), extend POMs/fixtures and update this file.
+- Keep guidance concise; remove obsolete sections.
+
+### Quality Gate (Definition of Done)
+
+- The affected spec passes via MCP first, then CLI single-file run.
+- Module run has no linter/type errors and is green or has justified skips.
+- If POMs changed/added, at least one spec uses and validates new methods.
+- Evidence includes MCP-first single-file run status before any CLI results.
+- Short result produced and commit message prepared.
