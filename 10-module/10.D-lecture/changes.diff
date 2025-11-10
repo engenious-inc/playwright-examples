@@ -1,0 +1,107 @@
+diff --git a/6-module/6.G-lecture/page-objects/NavigationPage.ts b/6-module/6.G-lecture/page-objects/NavigationPage.ts
+index 3163476..6e71a17 100644
+--- a/6-module/6.G-lecture/page-objects/NavigationPage.ts
++++ b/6-module/6.G-lecture/page-objects/NavigationPage.ts
+@@ -4,13 +4,6 @@ import { ButtonElement } from './components/ButtonElement';
+ import { DropDownElement } from './components/DropDownElement';
+ import { TextElement } from './components/TextElement';
+ 
+-const URL_PATHS = {
+-  OUR_CARS: '/our-cars',
+-  USER_PROFILE: '/user-profile',
+-  BOOKING_LIST: '/booking-list',
+-  BOOKING_DETAILS: (bookingId: number) => `/booking-details/${bookingId}`,
+-};
+-
+ export class NavigationPage extends BasePage {
+   private carButton: TextElement;
+   private carDetails: TextElement;
+@@ -34,66 +27,49 @@ export class NavigationPage extends BasePage {
+     await this.page.goto('/our-cars');
+   }
+ 
+-  async isCarButtonVisible(): Promise<boolean> {
+-    return await this.carButton.isVisible();
++  async isCarButtonVisible(carName: string): Promise<boolean> {
++    return await this.page.locator(`text=${carName}`).isVisible();
+   }
+ 
+-  async getCarDetailsText(): Promise<string> {
+-    const text = await this.carDetails.getText();
++  async getCarDetailsText(carName: string): Promise<string> {
++    const text = await this.page.locator(`text=${carName}`).textContent();
+     return text ?? '';
+   }
+ 
+   async getCarPriceText(carName: string, price: string): Promise<string> {
+-    const text = await this.carPrice.getText();
+-    return text.includes(`${carName} ${price}`) ? text : '';
++    const text = await this.page
++      .locator(`text=${carName} ${price}`)
++      .textContent();
++    return text ?? '';
+   }
+ 
+   async bookCar(carName: string): Promise<void> {
+     await this.page
+       .locator(`text=${carName} >> button:has-text("Book Now")`)
+-    this.bookNowButton = new ButtonElement(this.page, `text=${carName} >> button:has-text("Book Now")`);
+-    await this.bookNowButton.click();
+-  async isBookingPopupVisible(): Promise<boolean> {
++      .click();
++  }
++
+   async isBookingPopupVisible(): Promise<boolean> {
+-    try {
+-      return await this.bookingPopup.isVisible();
++    return await this.bookingPopup.isVisible();
++  }
++
+   async isCarSelectDropdownVisible(): Promise<boolean> {
+-    try {
+-      return await this.carSelectDropdown.isVisible();
+-    } catch (error) {
+-      console.error('Error checking visibility of car select dropdown:', error);
+-      return false;
+-    }
++    return await this.carSelectDropdown.isVisible();
+   }
+-    }
++
+   async isCarInBookingDetails(carName: string): Promise<boolean> {
+-    const carDetailsElement = new TextElement(this.page, `text=${carName}`);
+-    return await carDetailsElement.isVisible();
+-  }
++    return await this.page.locator(`text=${carName}`).isVisible();
+   }
+ 
+-  async isCarInBookingDetails(carName: string): Promise<boolean> {
+-  private static readonly URLS = {
+-    BOOKING_DETAILS: (bookingId: number) => `/booking-details/${bookingId}`,
+-    BOOKING_LIST: '/booking-list',
+-    USER_PROFILE: '/user-profile',
+-    OUR_CARS: '/our-cars',
+-  };
++  async isBookingDateVisible(date: string): Promise<boolean> {
++    return await this.page.locator(`text=${date}`).isVisible();
++  }
+ 
+   async goToBookingDetails(bookingId: number): Promise<void> {
+-    const bookingDetailsUrl = NavigationPage.URLS.BOOKING_DETAILS(bookingId);
+-    await this.page.goto(bookingDetailsUrl);
++    await this.page.goto(`/booking-details/${bookingId}`);
+   }
+-    return await bookingDateElement.isVisible();
+-  }
+-  }
+-  async goToBookingDetails(bookingId: number): Promise<void> {
+-      const bookingDetailsUrl = `/booking-details/${bookingId}`;
+-      await this.page.goto(bookingDetailsUrl);
+-    }
+-    await this.page.goto(NavigationPage.URLS.BOOKING_LIST);
+ 
+-    await this.page.goto(URL_PATHS.USER_PROFILE);
++  async goToUserProfile(): Promise<void> {
+     await this.page.goto('/user-profile');
+   }
+ 

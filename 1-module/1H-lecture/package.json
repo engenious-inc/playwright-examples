@@ -1,0 +1,14 @@
+{
+  "name": "playwright-examples",
+  "version": "1.0.0",
+  "description": "Welcome to the Playwright Automation Course! This repository is structured to help you easily navigate through each lesson. Each folder represents a specific topic or module in the course, allowing you to follow along seamlessly.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.48.2",
+    "@types/node": "^22.8.5"
+  }
+}

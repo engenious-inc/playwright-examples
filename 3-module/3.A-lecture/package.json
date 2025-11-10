@@ -1,0 +1,32 @@
+{
+  "name": "playwright-examples",
+  "version": "1.0.0",
+  "description": "Welcome to the Playwright Automation Course! This repository is structured to help you easily navigate through each lesson. Each folder represents a specific topic or module in the course, allowing you to follow along seamlessly.",
+  "main": "index.js",
+  "scripts": {
+    "prettier": "npx prettier --write .",
+    "prettier-check": "npx prettier . --check '!**.ts'",
+    "lint": "npx eslint . --max-warnings=0",
+    "test": "npx playwright test",
+    "test:debug": "npx playwright test --debug",
+    "test:headed": "npx playwright test --headed",
+    "show-report": "npx playwright show-report",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.14.0",
+    "@playwright/test": "^1.48.2",
+    "@types/node": "^22.9.0",
+    "eslint": "^9.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-playwright": "^2.0.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.12.0",
+    "husky": "^9.1.6",
+    "prettier": "3.3.3",
+    "typescript-eslint": "^8.12.2"
+  }
+}
