@@ -16,10 +16,7 @@ test('Navigate to and Verify the "BMW M760" Details Page', async ({ page }) => {
   await expect(
     page.getByRole('button', { name: 'Car Image Car Image BMW M760' }).nth(3),
   ).toBeVisible();
-  await expect(page.getByText('BMW 760')).toHaveAttribute(
-    'href',
-    '/cars/bmw-m760',
-  );
+  await expect(page.getByText('BMW 760')).toHaveRole('heading');
   await expect(page.getByText('BMW M760$450/dayBook Now')).toBeVisible();
   await expect(page.getByText('Book Now').nth(4)).toBeVisible();
 });
